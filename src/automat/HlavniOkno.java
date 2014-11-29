@@ -168,8 +168,6 @@ public class HlavniOkno extends JFrame {
 		
 		JButton btVstup = new JButton();
 		btVstup.setText("Zadat nový vstup");
-		JButton test = new JButton(akce.new KonecAkce());
-		tlacitkaPN.add(test);
 		//btVstup.setPreferredSize(new Dimension(30,30));
 		
 		JButton btZacatek = new JButton();
