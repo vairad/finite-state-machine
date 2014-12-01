@@ -1,4 +1,4 @@
-package automat;
+
 
 import gui.HlavniOkno;
 

@@ -1,4 +1,5 @@
-package automat;
+package program;
+
 
 import gui.HlavniOkno;
 
