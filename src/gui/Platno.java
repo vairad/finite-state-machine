@@ -41,8 +41,8 @@ public class Platno extends JPanel {
 	 * Konstruktor vytvori prazdne platno o defaultni velikosti 800x600 pixelu.
 	 */
 	public Platno() {
-		this.sirka = 800;
-		this.vyska = 600;
+		this.sirka = 2000;
+		this.vyska = 2000;
 		this.setPreferredSize(new Dimension(this.sirka, this.vyska));
 	}
 	

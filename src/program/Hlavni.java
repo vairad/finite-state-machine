@@ -16,6 +16,8 @@ public class Hlavni {
 	public static MoorAutomat automat = null;
 	public static List<Stav> stavy = null;
 	
+	public static HlavniOkno okno = null;
+	
 	public static void main(String[] args) {
 		
 		//nacteni dat
@@ -25,10 +27,14 @@ public class Hlavni {
 		// konec nacteni dat
 		
 		if(automat != null && stavy!=null){
-			new HlavniOkno();
+			okno = new HlavniOkno();
 		}else{
 			System.out.println("Data nebyla korektnì naètena.");
 		}
 	
+	}
+	
+	public static Stav getAktualniStav(){
+		return stavy.get(automat.getAktualniStav());
 	}
 }

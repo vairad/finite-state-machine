@@ -36,10 +36,8 @@ public class HlavniOkno extends JFrame {
 	public HlavniOkno() {		
 		this.setTitle("Koneèný automat s výstupní funkcí");	
 		this.setBackground(SVETLE_ZLUTA);
-		this.setLocationRelativeTo(null);
-		this.setSize(1000, 800);
-		this.setLocation(this.getLocation().x - this.getWidth()/2, this.getLocation().y - this.getHeight()/2);
 		
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 		this.platno = new Platno();
 		platno.setBackground(SVETLE_ZLUTA);
@@ -172,7 +170,6 @@ public class HlavniOkno extends JFrame {
 		//btVstup.setPreferredSize(new Dimension(30,30));
 		
 		JButton btZacatek = new JButton(Akce.reset);
-		btZacatek.setText("Na zaèátek");
 		//btZacatek.setPreferredSize(new Dimension(30,30));
 		
 		JButton btVzad = new JButton();

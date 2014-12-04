@@ -23,7 +23,7 @@ public class Akce {
 	/** reset automatu */
 	public static AbstractAction reset = new Akce().new ResetAkce();
 	/** krok podle znaku */
-	public static AbstractAction vstup = new Akce().new KrokAkce();
+	public static AbstractAction vstup = new Akce().new ZnakAkce();
 	
 	
 //===================================================================================================================	
@@ -96,11 +96,11 @@ public class Akce {
 		}
 	
 		public void actionPerformed(ActionEvent e) {
+			Hlavni.getAktualniStav().setBarva(Stav.BEZNY);
 			Hlavni.automat.reset();
-			for (Stav stav : Hlavni.stavy) {
-				stav.setBarva(Stav.BEZNY);
-			}
-			Hlavni.stavy.get(Hlavni.automat.getAktualniStav()).setBarva(Stav.AKTIVNI);;
+			Hlavni.getAktualniStav().setBarva(Stav.AKTIVNI);
+			Hlavni.okno.repaint();
+			
 		}
 	}
 	
@@ -109,12 +109,12 @@ public class Akce {
 	/**
 	 * Zajistuje zpracovani znaku automatem
 	 */
-	class KrokAkce extends AbstractAction {
+	class ZnakAkce extends AbstractAction {
 		private static final long serialVersionUID = 1L;
 		
-		public KrokAkce() {
+		public ZnakAkce() {
 			//ImageIcon ikona = new ImageIcon(getClass().getResource("/images/help.gif"));
-            putValue(NAME, "Krok"); // jmeno akce
+            putValue(NAME, "Vstup znaku"); // jmeno akce
           //  putValue(SMALL_ICON, ikona); // na tlacitku bude jen ikonka
             putValue(SHORT_DESCRIPTION, "Provede krok automatu"); // popis tlacitka
             putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_D)); // klavesova zkratka pro navigaci v menu
@@ -122,9 +122,14 @@ public class Akce {
 		}
 	
 		public void actionPerformed(ActionEvent e) {
-			Hlavni.stavy.get(Hlavni.automat.getAktualniStav()).setBarva(Stav.BEZNY);
-			Hlavni.automat.zpracujVstup(((String)new JOptionPane("Zadej znak").getValue()).trim().charAt(0));
-			Hlavni.stavy.get(Hlavni.automat.getAktualniStav()).setBarva(Stav.AKTIVNI);
+			Hlavni.getAktualniStav().setBarva(Stav.BEZNY);
+			
+			String vstup = JOptionPane.showInputDialog(Hlavni.okno, "Zadej jeden znak pro zpracovani automatem", "Zadej znak", JOptionPane.DEFAULT_OPTION);
+			vstup = vstup.trim();
+			
+			Hlavni.automat.zpracujVstup(vstup.charAt(0));
+			Hlavni.getAktualniStav().setBarva(Stav.AKTIVNI);
+			Hlavni.okno.repaint();
 		}
 	}
 	
