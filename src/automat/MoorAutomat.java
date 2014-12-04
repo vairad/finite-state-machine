@@ -70,6 +70,28 @@ public class MoorAutomat {
 	}
 	
 	/**
+	 * Po obdrzeni znaku ze vstupni abecedy, provede reverzni prechod dle prechodove funkce. (proti standardnimu smeru)
+	 * Pokud neni pro tento vstup definovana hrana, automat nezmeni stav.
+	 * 
+	 * @param c znak ze vstupni abecedy
+	 * @return vraci pravdivostni hodnotu, zda byl prechod proveden dle tabulky, nebo doslo k chybe
+	 */
+	public boolean zpracujVstupReverse(char c){
+		if(!jePrvkemVstupu(c)){
+			log("Znak \""+c+"\" neni prvkem vstupni abecedy");
+		}
+		for(int i = 0; i < prechodova_funkce[aktualni_stav].length; i++){
+			if(prechodova_funkce[i][aktualni_stav]==c){
+				log("Automat byl navracen ze stavu: "+aktualni_stav+" do stavu: "+i+" znakem: "+c);
+				aktualni_stav=i;
+				return true;
+			}
+		}
+		log("Stav nemá definovanou vstupni hranu pro "+c);
+		return false;
+	}
+	
+	/**
 	 * Prevede automat do pocatecniho stavu
 	 */
 	public void reset(){
