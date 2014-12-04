@@ -1,0 +1,23 @@
+Stavy:
+6
+150;150;pes
+150;300;kocka
+150;600;mrkev
+300;150;ryba
+300;300;muz
+300;600;hlava
+Vstupni abeceda:
+a b c d e f
+Vystupni abeceda:
+g h i j k l
+Vystupni funkce:
+g h i j k l
+Pocatecni stav:
+0
+Prechodova funkce:
+0 a 0 0 0 0
+0 0 b 0 0 0
+0 0 0 c 0 0
+0 0 0 0 d 0
+0 0 0 0 0 a
+0 0 0 0 0 0

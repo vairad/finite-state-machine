@@ -4,24 +4,28 @@ import java.awt.Color;
 
 
 public class Stav {
+	public static final Color BEZNY = new Color(179,196,227);
+	public static final Color AKTIVNI = new Color(0,196,227);
+	
 	private int x;
 	private int y;
+	public int id;
 	private String nazev;
 	private Color barva;
-	public static final Color BEZNY = new Color(179,196,227);
 	
-	public Stav(int x, int y) {
-		this(x, y, "");
+	
+	public Stav(int x, int y, int id) {
+		this(x, y, id, "");
 	}
 	
-	public Stav(int x, int y, String nazev) {
-		this(x, y, nazev, BEZNY);
-		
+	public Stav(int x, int y, int id, String nazev) {
+		this(x, y, id, nazev, BEZNY);
 	}
 	
-	public Stav(int x, int y, String nazev, Color barva) {
+	public Stav(int x, int y, int id, String nazev, Color barva) {
 		this.x = x;
 		this.y = y;
+		this.id = id;
 		this.nazev = nazev;
 		this.setBarva(barva);
 	}

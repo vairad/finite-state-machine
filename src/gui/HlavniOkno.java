@@ -16,6 +16,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.border.BevelBorder;
 
+import program.Hlavni;
+
 public class HlavniOkno extends JFrame {
 	
 	/** stredne modra barva */
@@ -30,8 +32,6 @@ public class HlavniOkno extends JFrame {
 	private static final long serialVersionUID = 1L;
 	/** kreslici platno */
 	private Platno platno;
-	/** umoznuje pristup k jednotlivym akcim */
-	private Akce akce;
 	
 	public HlavniOkno() {		
 		this.setTitle("Koneèný automat s výstupní funkcí");	
@@ -39,9 +39,11 @@ public class HlavniOkno extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setSize(1000, 800);
 		this.setLocation(this.getLocation().x - this.getWidth()/2, this.getLocation().y - this.getHeight()/2);
+		
+		
 		this.platno = new Platno();
 		platno.setBackground(SVETLE_ZLUTA);
-		akce = new Akce(platno);
+		
 		JScrollPane posuvnik = new JScrollPane(platno);
 		this.setJMenuBar(getMenu());
 		this.add(getHorniPanel(), BorderLayout.NORTH);
@@ -87,7 +89,7 @@ public class HlavniOkno extends JFrame {
         soubor.add(polozkaMenu);  
         soubor.addSeparator();
         
-        polozkaMenu = new JMenuItem(akce.new KonecAkce());
+        polozkaMenu = new JMenuItem(Akce.konec);
         polozkaMenu.setBackground(SVETLE_MODRA);
         soubor.add(polozkaMenu);
         
@@ -136,7 +138,7 @@ public class HlavniOkno extends JFrame {
 	private JMenu menuNapoveda() {
         JMenu napoveda = new JMenu("Nápovìda");
         
-        JMenuItem polozkaMenu = new JMenuItem(akce.new NapovedaAkce());
+        JMenuItem polozkaMenu = new JMenuItem(Akce.napoveda);
         polozkaMenu.setBackground(SVETLE_MODRA);
         napoveda.add(polozkaMenu);
         
@@ -166,11 +168,10 @@ public class HlavniOkno extends JFrame {
 		tlacitkaPN.setBorder(BorderFactory.createTitledBorder("Akce"));
 		tlacitkaPN.setBackground(STREDNE_ZLUTA);
 		
-		JButton btVstup = new JButton();
-		btVstup.setText("Zadat nový vstup");
+		JButton btVstup = new JButton(Akce.vstup);
 		//btVstup.setPreferredSize(new Dimension(30,30));
 		
-		JButton btZacatek = new JButton();
+		JButton btZacatek = new JButton(Akce.reset);
 		btZacatek.setText("Na zaèátek");
 		//btZacatek.setPreferredSize(new Dimension(30,30));
 		

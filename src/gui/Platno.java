@@ -8,6 +8,8 @@ import java.awt.geom.Line2D;
 
 import javax.swing.JPanel;
 
+import program.Hlavni;
+
 public class Platno extends JPanel {
 
 	/**	defaultni nastaveni */
@@ -16,6 +18,7 @@ public class Platno extends JPanel {
 	private int sirka;
 	/** vyska platna */
 	private int vyska; 
+	
 	/** sirka vsech vykreslovanych stavu */
 	private final int SIRKA_UZLU = 50;
 	public final Color CHYBOVY = Color.RED;
@@ -52,19 +55,18 @@ public class Platno extends JPanel {
 		super.paint(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
-		Stav stav1 = new Stav(100,100,"S1", CHYBOVY);
-		vykresliStav(g2, stav1, stav1.getBarva());
+		for (Stav stav : Hlavni.stavy) {
+			vykresliStav(g2, stav, stav.getBarva());
+		}
 		
-		Stav stav2 = new Stav(200,300,"S2");
-		vykresliStav(g2, stav2, stav2.getBarva());
-		prebarviStav(g2, stav2, AKTUALNI);
-		
-		Stav stav3 = new Stav(400,500,"S3");
-		vykresliStav(g2, stav3, stav3.getBarva());
-		kresliHranu(g2, stav2, stav3, "gama");
-		
-		kresliHranu(g2, stav1, stav1, "alfa");
-		kresliHranu(g2, stav3, stav1, "beta");
+		char[][] prechodova_funkce = Hlavni.automat.getPrechodovaFce();
+		for (int i = 0; i < prechodova_funkce.length; i++) {
+			for(int j = 0; j<prechodova_funkce[i].length; j++){
+				if(prechodova_funkce[i][j]!='0'){
+					kresliHranu(g2, Hlavni.stavy.get(i), Hlavni.stavy.get(j), ""+prechodova_funkce[i][j]);
+				}
+			}
+		}
 	}
 	
 	
