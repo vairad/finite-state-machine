@@ -57,6 +57,7 @@ public class MoorAutomat {
 	public boolean zpracujVstup(char c){
 		if(!jePrvkemVstupu(c)){
 			log("Znak \""+c+"\" neni prvkem vstupni abecedy");
+			return false;
 		}
 		for(int i = 0; i < prechodova_funkce[aktualni_stav].length; i++){
 			if(prechodova_funkce[aktualni_stav][i]==c){
@@ -79,6 +80,7 @@ public class MoorAutomat {
 	public boolean zpracujVstupReverse(char c){
 		if(!jePrvkemVstupu(c)){
 			log("Znak \""+c+"\" neni prvkem vstupni abecedy");
+			return false;
 		}
 		for(int i = 0; i < prechodova_funkce[aktualni_stav].length; i++){
 			if(prechodova_funkce[i][aktualni_stav]==c){
