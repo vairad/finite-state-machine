@@ -67,6 +67,9 @@ public class Platno extends JPanel {
 				}
 			}
 		}
+		
+		// aktualizace hodnoty vstupu
+		Hlavni.okno.vystup.setText(" "+Hlavni.automat.getVystup());
 	}
 	
 	

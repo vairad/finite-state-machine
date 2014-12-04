@@ -33,21 +33,24 @@ public class Akce {
 	
 //===================================================================================================================
 
-	public static void vpred(char c) {
+	public static boolean vpred(char c) {
 		if(!Hlavni.automat.jePrvkemVstupu(c)){
 			JOptionPane.showMessageDialog(Hlavni.okno, "Zadany znak neni prvkem vstupni abecedy.\n"
 					+ "Automat ho bude ignorovat.",	"Chyba vstupu", JOptionPane.WARNING_MESSAGE);
+			return false;
 		}else{
-			Hlavni.automat.zpracujVstup(c);
+			return Hlavni.automat.zpracujVstup(c);
 		}
+		
 	}
 	
-	public static void vzad(char c) {
+	public static boolean vzad(char c) {
 		if(!Hlavni.automat.jePrvkemVstupu(c)){
 			JOptionPane.showMessageDialog(Hlavni.okno, "Zadany znak neni prvkem vstupni abecedy.\n"
 					+ "Automat ho bude ignorovat.",	"Chyba vstupu", JOptionPane.WARNING_MESSAGE);
+			return false;
 		}else{
-			Hlavni.automat.zpracujVstupReverse(c);
+			return Hlavni.automat.zpracujVstupReverse(c);
 		}
 	}
 	
@@ -158,8 +161,9 @@ public class Akce {
 					vstup = vstup.trim();
 				if(vstup.length()>0){
 					char ch = vstup.charAt(0);
-					vpred(ch);
-					Hlavni.okno.zpracovany.setText(Hlavni.okno.zpracovany.getText()+ch);
+					if(vpred(ch)){
+						Hlavni.okno.zpracovany.setText(Hlavni.okno.zpracovany.getText()+ch);
+					}
 				}
 			}
 			Hlavni.getAktualniStav().setBarva(Stav.AKTIVNI);
@@ -218,8 +222,13 @@ public class Akce {
 			String vstup = Hlavni.okno.vstup.getText().trim();
 			if(vstup != null && vstup.length()>0){
 				char c = vstup.charAt(0);
-				vpred(c);
-				Hlavni.okno.zpracovany.setText(Hlavni.okno.zpracovany.getText()+c);
+				if(vpred(c)){
+					Hlavni.okno.zpracovany.setText(Hlavni.okno.zpracovany.getText()+c);	
+				}
+				else{
+					JOptionPane.showMessageDialog(Hlavni.okno, "Pro znak "+c+" není definovaná pøechodová funkce\n"
+							+ "Automat ho bude ignorovat.",	"Chyba vstupu", JOptionPane.WARNING_MESSAGE);
+				}
 				Hlavni.okno.vstup.setText(vstup.substring(1));
 			}
 			

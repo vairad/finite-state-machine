@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -12,7 +13,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 
@@ -34,6 +34,7 @@ public class HlavniOkno extends JFrame {
 	/** zobrazeni front znaku automatu */
 	public JTextField zpracovany;
 	public JTextField vstup;
+	public JTextField vystup;
 	
 	public HlavniOkno() {		
 		this.setTitle("Koneèný automat s výstupní funkcí");	
@@ -58,6 +59,13 @@ public class HlavniOkno extends JFrame {
 	private void initTextPole(){
 		Dimension d = new Dimension(150,30);
 		
+		vystup = new JTextField();
+		vystup.setPreferredSize(new Dimension(30,30));
+		vystup.setEnabled(false);
+		Font f = new Font("Calibri", Font.BOLD, 20);
+		vystup.setFont(f);
+		vystup.setDisabledTextColor(Color.RED);
+		
 		vstup = new JTextField();
 		vstup.setPreferredSize(d);
 		vstup.setEnabled(false);
@@ -66,7 +74,7 @@ public class HlavniOkno extends JFrame {
 		zpracovany = new JTextField();
 		zpracovany.setPreferredSize(d);
 		zpracovany.setEnabled(false);
-		zpracovany.setDisabledTextColor(Color.gray);
+		zpracovany.setDisabledTextColor(Color.GRAY);
 	}
 	
 	/**
@@ -204,6 +212,7 @@ public class HlavniOkno extends JFrame {
 		btKonec.setText("Na konec");
 		//btKonec.setPreferredSize(new Dimension(30,30));*/
 
+		tlacitkaPN.add(vystup);
 		tlacitkaPN.add(zpracovany);
 		tlacitkaPN.add(vstup);
 		tlacitkaPN.add(btVstup);
