@@ -24,6 +24,7 @@ public class Akce {
 	public static AbstractAction reset = new Akce().new ResetAkce();
 	/** krok podle znaku */
 	public static AbstractAction vstup = new Akce().new ZnakAkce();
+	/** vloz retezec ke zpracovani */
 	
 	
 //===================================================================================================================	
@@ -125,9 +126,18 @@ public class Akce {
 			Hlavni.getAktualniStav().setBarva(Stav.BEZNY);
 			
 			String vstup = JOptionPane.showInputDialog(Hlavni.okno, "Zadej jeden znak pro zpracovani automatem", "Zadej znak", JOptionPane.DEFAULT_OPTION);
-			vstup = vstup.trim();
-			
-			Hlavni.automat.zpracujVstup(vstup.charAt(0));
+			if(vstup!=null){
+					vstup = vstup.trim();
+				if(vstup.length()>0){
+					char ch = vstup.charAt(0);
+					if(!Hlavni.automat.jePrvkemVstupu(ch)){
+						JOptionPane.showMessageDialog(Hlavni.okno, "Zadany znak neni prvkem vstupni abecedy.\n"
+								+ "Automat ho bude ignorovat.",	"Chyba vstupu", JOptionPane.WARNING_MESSAGE);
+					}else{
+						Hlavni.automat.zpracujVstup(ch);
+					}
+				}
+			}
 			Hlavni.getAktualniStav().setBarva(Stav.AKTIVNI);
 			Hlavni.okno.repaint();
 		}
