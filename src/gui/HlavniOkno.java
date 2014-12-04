@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -14,11 +13,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 
-import program.Hlavni;
-
 public class HlavniOkno extends JFrame {
+	private static final long serialVersionUID = 1L;
 	
 	/** stredne modra barva */
 	private final Color STREDNE_MODRA = new Color(179,196,227);
@@ -28,19 +27,25 @@ public class HlavniOkno extends JFrame {
 	private final Color SVETLE_MODRA = new Color(223,231,247);
 	/** stredne zluta barva */
 	private final Color STREDNE_ZLUTA = new Color(253,236,126);
-	/** defaultni nastaveni */
-	private static final long serialVersionUID = 1L;
+	
 	/** kreslici platno */
 	private Platno platno;
+	
+	/** zobrazeni front znaku automatu */
+	public JTextField zpracovany;
+	public JTextField vstup;
 	
 	public HlavniOkno() {		
 		this.setTitle("Koneèný automat s výstupní funkcí");	
 		this.setBackground(SVETLE_ZLUTA);
 		
+		this.setSize(new Dimension(500,500));
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 		this.platno = new Platno();
 		platno.setBackground(SVETLE_ZLUTA);
+		
+		initTextPole();
 		
 		JScrollPane posuvnik = new JScrollPane(platno);
 		this.setJMenuBar(getMenu());
@@ -48,6 +53,20 @@ public class HlavniOkno extends JFrame {
 		this.add(posuvnik, BorderLayout.CENTER);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+	}
+	
+	private void initTextPole(){
+		Dimension d = new Dimension(150,30);
+		
+		vstup = new JTextField();
+		vstup.setPreferredSize(d);
+		vstup.setEnabled(false);
+		vstup.setDisabledTextColor(Color.BLACK);
+		
+		zpracovany = new JTextField();
+		zpracovany.setPreferredSize(d);
+		zpracovany.setEnabled(false);
+		zpracovany.setDisabledTextColor(Color.gray);
 	}
 	
 	/**
@@ -167,34 +186,34 @@ public class HlavniOkno extends JFrame {
 		tlacitkaPN.setBackground(STREDNE_ZLUTA);
 		
 		JButton btVstup = new JButton(Akce.vstup);
-		//btVstup.setPreferredSize(new Dimension(30,30));
 		
 		JButton btZacatek = new JButton(Akce.reset);
-		//btZacatek.setPreferredSize(new Dimension(30,30));
 		
-		JButton btVzad = new JButton();
-		btVzad.setText("Krok vzad");
-		//btVzad.setPreferredSize(new Dimension(30,30));
+		JButton btString = new JButton(Akce.string);
 		
-		JButton btAnimace = new JButton();
+		JButton btVzad = new JButton(Akce.krokVzad);
+		
+	/*	JButton btAnimace = new JButton();
 		btAnimace.setText("Spustit/zastavit animaci");
-		//btAnimace.setPreferredSize(new Dimension(30,30));
+		//btAnimace.setPreferredSize(new Dimension(30,30));*/
 		
-		JButton btVpred = new JButton();
-		btVpred.setText("Krok vpøed");
+		JButton btVpred = new JButton(Akce.krokVpred);
 		//btVpred.setPreferredSize(new Dimension(30,30));
 		
-		JButton btKonec = new JButton();
+	/*	JButton btKonec = new JButton();
 		btKonec.setText("Na konec");
-		//btKonec.setPreferredSize(new Dimension(30,30));
-			
+		//btKonec.setPreferredSize(new Dimension(30,30));*/
+
+		tlacitkaPN.add(zpracovany);
+		tlacitkaPN.add(vstup);
 		tlacitkaPN.add(btVstup);
-		tlacitkaPN.add(new JSeparator());
 		tlacitkaPN.add(btZacatek);
+		
+		tlacitkaPN.add(btString);
 		tlacitkaPN.add(btVzad);
-		tlacitkaPN.add(btAnimace);
+	//	tlacitkaPN.add(btAnimace);
 		tlacitkaPN.add(btVpred);
-		tlacitkaPN.add(btKonec);
+	//	tlacitkaPN.add(btKonec);
 		
 		return tlacitkaPN;
 	}
