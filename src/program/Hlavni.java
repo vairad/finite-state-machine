@@ -5,13 +5,10 @@ import gui.HlavniOkno;
 import gui.Stav;
 
 import java.util.List;
-import java.util.Scanner;
 
 import automat.MoorAutomat;
 
 public class Hlavni {
-
-	private static Scanner sc = new Scanner(System.in);
 	
 	public static MoorAutomat automat = null;
 	public static List<Stav> stavy = null;
@@ -20,9 +17,13 @@ public class Hlavni {
 	
 	public static void main(String[] args) {
 		
+		if(args.length==0){
+			System.out.println("Nebyl zadán název souboru");
+			System.exit(18);
+		}
 		//nacteni dat
-		stavy = Loader.loadStavy("01.automat");
-		automat = Loader.loadAutomat("01.automat");
+		stavy = Loader.loadStavy(args[0]);
+		automat = Loader.loadAutomat(args[0]);
 		stavy.get(automat.getAktualniStav()).setBarva(Stav.AKTIVNI);
 		// konec nacteni dat
 		
