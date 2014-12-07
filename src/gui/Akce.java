@@ -205,6 +205,7 @@ public class Akce {
 			
 			Hlavni.okno.vstup.setText("");
 			Hlavni.okno.zpracovany.setText("");
+			Hlavni.okno.vystupni_retezec.setText(""+Hlavni.automat.getVystup());
 
 			Hlavni.okno.repaint();
 			
@@ -243,6 +244,8 @@ public class Akce {
 					char ch = vstup.charAt(0);
 					if(vpred(ch)){
 						Hlavni.okno.zpracovany.setText(Hlavni.okno.zpracovany.getText()+ch);
+						Hlavni.okno.vystupni_retezec.setText(
+								Hlavni.okno.vystupni_retezec.getText()+Hlavni.automat.getVystup());
 					}else{
 						JOptionPane.showMessageDialog(Hlavni.okno, "Pro znak "+ch+" není definovaná pøechodová funkce\n"
 								+ "Automat ho bude ignorovat.",	"Chyba vstupu", JOptionPane.WARNING_MESSAGE);
@@ -365,6 +368,8 @@ public class Akce {
 				char c = vstup.charAt(0);
 				if(vpred(c)){
 					Hlavni.okno.zpracovany.setText(Hlavni.okno.zpracovany.getText()+c);	
+					Hlavni.okno.vystupni_retezec.setText(
+							Hlavni.okno.vystupni_retezec.getText()+Hlavni.automat.getVystup());
 				}
 				else{
 					JOptionPane.showMessageDialog(Hlavni.okno, "Pro znak "+c+" není definovaná pøechodová funkce\n"
@@ -409,6 +414,14 @@ public class Akce {
 					
 					Hlavni.okno.vstup.setText(c+Hlavni.okno.vstup.getText());
 					Hlavni.okno.zpracovany.setText(vystup.substring(0,vystup.length()-1));
+					
+					String tmp = Hlavni.okno.vystupni_retezec.getText();
+					if(tmp.length()>0){
+						Hlavni.okno.vystupni_retezec.setText(tmp.substring(0,tmp.length()-1));
+					}else{
+						Hlavni.okno.vystupni_retezec.setText("");
+					}
+					
 				}
 				
 				Hlavni.getAktualniStav().setBarva(Stav.AKTIVNI);

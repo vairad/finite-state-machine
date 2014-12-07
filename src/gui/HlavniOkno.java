@@ -18,6 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 
+import program.Hlavni;
+
 /**
  * Objekt teto tridy predstavuje hlavni okno aplikace, 
  * kde se zobrazuje automat a ovladaci prvky k nìmu.
@@ -70,7 +72,8 @@ public class HlavniOkno extends JFrame {
 		this.add(posuvnik, BorderLayout.CENTER);
 		
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		vystupni_retezec.setText(vystupni_retezec.getText()+Hlavni.automat.getVystup());
 	}
 	
 	/**
