@@ -2,11 +2,22 @@
 /bin/
 #ignoruje data
 /data/
-#ignoruje vysledky PMD
+#ignoruje vysledky PMD z cmd
 /PMD/
+#ignoruje PMD z Eclipse
+*.pmd
+*.ruleset
 #ignoruje soubor eclipse
 .project
+/.settings/
 #ignoruje okenni bordel
 Thumbs.db
 #ignoruje vsechny tabulky
 *.csv
+#ignoruje xml soubory
+*.xml
+#ignoruje txt
+*.txt
+#ignoruje automat soubory
+*.automat
+
