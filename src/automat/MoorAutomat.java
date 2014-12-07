@@ -17,15 +17,30 @@ public class MoorAutomat {
 	/** soubor logu akci automatu */
 	private BufferedWriter log = null;
 	
+	/** prechodova funkce */
 	private final char[][] prechodova_funkce;
+	/** vystupni funkce */
 	private final char[] vystupni_funkce;
 	
+	/** vstupni abeceda */
 	private final char[] vstupni_abeceda;
+	/** vystupni abeceda */
 	private final char[] vystupni_abeceda;
 	
+	/** pocatecni stav */
 	private final int pocatecni_stav;
+	/** aktualni stav */
 	private int aktualni_stav;
 	
+	/**
+	 * Vytvori automat Moorova typu podle zadanych parametru.
+	 * @param prechodova_funkce prechodova funkce
+	 * @param vystupni_funkce vystupni funkce
+	 * @param vstupni_abeceda vstupni abeceda
+	 * @param vystupni_abeceda vystupni abeceda
+	 * @param aktualni_stav aktualni stav
+	 * @param pocatecni_stav pocatecni stav
+	 */
 	public MoorAutomat(char[][] prechodova_funkce, char[] vystupni_funkce,
 			char[] vstupni_abeceda, char[] vystupni_abeceda, int aktualni_stav,
 			int pocatecni_stav) {
@@ -102,10 +117,18 @@ public class MoorAutomat {
 	}
 	
 //====================================================================================================================
+	/**
+	 * Vrati aktualni stav.
+	 * @return aktualni stav
+	 */
 	public int getAktualniStav(){
 		return aktualni_stav;
 	}
 	
+	/**
+	 * Vrati prechodovou funkci.
+	 * @return prechodova funkce
+	 */
 	public char[][] getPrechodovaFce(){
 		return prechodova_funkce;
 	}
@@ -143,7 +166,7 @@ public class MoorAutomat {
 //===========================Logovani vystupu==================================================================
 	
 	/**
-	 * Otevre vytvori soubor logu dle zadane cesty.
+	 * Otevre a vytvori soubor logu dle zadane cesty.
 	 * @param filePath cesta k souboru
 	 */
 	public void startLogovaniAutomatu(String filePath){
@@ -155,7 +178,7 @@ public class MoorAutomat {
 	}
 	
 	/**
-	 * Zapise radek resp. retezec do souboru a nakonec odtadkuje
+	 * Zapise radek resp. retezec do souboru a nakonec odradkuje
 	 * @param s retezec pro zápis
 	 */
 	public void log(String s){
@@ -165,7 +188,7 @@ public class MoorAutomat {
 				log.newLine();
 			} catch (IOException e) {
 				log=null;
-				System.err.println("Pristup do soubrou s logem nebyl mozny");
+				System.err.println("Pristup do souboru s logem nebyl mozny");
 				// pokud se nepovede log, neni treba upozornovat uzivatele...
 				// po vetsinou by to melo projit, a zastavit se jiz pri inicializaci
 			}
@@ -181,7 +204,7 @@ public class MoorAutomat {
 				log.close();
 			} catch (IOException e) {
 				log=null;
-				System.err.println("Pristup do soubrou s logem nebyl mozny");
+				System.err.println("Pristup do souboru s logem nebyl mozny");
 				// pokud se nepovede log, neni treba upozornovat uzivatele...
 				// po vetsinou by to melo projit, a zastavit se jiz pri inicializaci
 			}

@@ -12,7 +12,7 @@ import javax.swing.JTextArea;
 /**
  * Objekt teto tridy predstavuje okno napovedy, 
  * ve ktere jsou obsazeny informace o aplikaci.
- * @author Deni Tarantikova
+ * @author Deni Tarantikova, Radek Vais
  * @version 16. 11. 2014
  */
 public class NapovedaOkno extends JFrame {
@@ -36,9 +36,16 @@ public class NapovedaOkno extends JFrame {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBackground(STREDNE_ZLUTA);
 		
-		JTextArea popis = new JTextArea("Tato aplikace vznikla v rámci semestrální práce "
-				+ "z pøedmìtu Teoretická informatika Katedry informatiky a výpoèetní techniky "
-				+ "na Západoèeské univerzitì v Plzni");
+		JTextArea popis = new JTextArea("Tato aplikace vznikla v zimním semestru akad. roku 2014/2015 "
+				+ "jako semestrální práce z pøedmìtu Teoretická informatika "
+				+ "Katedry informatiky a výpoèetní techniky "
+				+ "na Západoèeské univerzitì v Plzni.\n\n Nápovìda: "
+				+ "\n1) Naètìte ze souboru vstupní automat nebo použijte pøipravený."
+				+ "\n2) Zadejte vstupní symbol nebo vstupní øetìzec. "
+				+ "Mùžete ho naèíst i ze souboru v textovém formátu."
+				+ "\n3) Tlaèítky \"Krok vpøed\" a \"Krok vzad\" krokujete automat."
+				+ "\n4) Tlaèítkem \"Reset\" vrátíte automat do pùvodního stavu."
+				+ "\n5) V polích v záložce \"Zpracovávání znakù\" vidíte aktuální stav zpracovávání vstupu.");
 		popis.setBackground(STREDNE_ZLUTA);
 		popis.setLineWrap(true);
 		popis.setWrapStyleWord(true);
