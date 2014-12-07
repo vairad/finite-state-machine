@@ -163,6 +163,9 @@ public class Akce {
 					char ch = vstup.charAt(0);
 					if(vpred(ch)){
 						Hlavni.okno.zpracovany.setText(Hlavni.okno.zpracovany.getText()+ch);
+					}else{
+						JOptionPane.showMessageDialog(Hlavni.okno, "Pro znak "+ch+" není definovaná pøechodová funkce\n"
+								+ "Automat ho bude ignorovat.",	"Chyba vstupu", JOptionPane.WARNING_MESSAGE);
 					}
 				}
 			}
