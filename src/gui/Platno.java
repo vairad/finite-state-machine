@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 
 import javax.swing.JPanel;
@@ -57,7 +58,7 @@ public class Platno extends JPanel {
 		Graphics2D g2 = (Graphics2D) g;
 		
 		// vykresleni mrizky
-		g2.setColor(Color.YELLOW);
+		g2.setColor(Color.LIGHT_GRAY);
 		for(int i = 0; i < this.sirka; i += 100) {
 			g2.drawLine(i, 0, i, this.vyska);
 		}
@@ -65,10 +66,8 @@ public class Platno extends JPanel {
 			g2.drawLine(0, j, this.sirka, j);
 		}
 		
-		g2.setColor(Color.BLACK);
-		for (Stav stav : Hlavni.stavy) {
-			vykresliStav(g2, stav, stav.getBarva());
-		}
+		
+		//vykresli hrany
 		
 		char[][] prechodova_funkce = Hlavni.automat.getPrechodovaFce();
 		for (int i = 0; i < prechodova_funkce.length; i++) {
@@ -78,6 +77,14 @@ public class Platno extends JPanel {
 				}
 			}
 		}
+		
+		
+		//vykresli stavy
+		g2.setColor(Color.BLACK);
+		for (Stav stav : Hlavni.stavy) {
+			vykresliStav(g2, stav, stav.getBarva());
+		}
+	
 		
 		// aktualizace hodnoty vstupu
 		Hlavni.okno.vystup.setText(" "+Hlavni.automat.getVystup());
@@ -90,13 +97,18 @@ public class Platno extends JPanel {
 	 * @param barva barva stavu
 	 */
 	public void vykresliStav(Graphics2D g, Stav stav, Color barva) {
+		AffineTransform tmp = g.getTransform();
+		
+		g.translate(stav.getX(), stav.getY());
 		g.setColor(barva);
-		g.fillOval(stav.getX(), stav.getY(), SIRKA_UZLU, SIRKA_UZLU);
+		g.fillOval(-(SIRKA_UZLU/2), -(SIRKA_UZLU/2), SIRKA_UZLU, SIRKA_UZLU);
 		g.setColor(Color.BLACK);
-		g.drawOval(stav.getX(), stav.getY(), SIRKA_UZLU, SIRKA_UZLU);
+		g.drawOval(-(SIRKA_UZLU/2), -(SIRKA_UZLU/2), SIRKA_UZLU, SIRKA_UZLU);
 		g.drawString(stav.getNazev(), 
-				stav.getX() + SIRKA_UZLU/2 - g.getFontMetrics().stringWidth(stav.getNazev())/2, 
-				stav.getY() + SIRKA_UZLU/2 + g.getFont().getSize()/2);
+				0 - g.getFontMetrics().stringWidth(stav.getNazev())/2, 
+				0 + g.getFont().getSize()/2);
+		
+		g.setTransform(tmp);
 	}
 	
 	/**
@@ -124,10 +136,10 @@ public class Platno extends JPanel {
 		g.setColor(Color.BLACK);
 		double meritkoSipky = 15;	
 		
-		double x1 = pocatek.getX() + SIRKA_UZLU/2;
-		double x2 = konec.getX() + SIRKA_UZLU/2;
-		double y1 = pocatek.getY() + SIRKA_UZLU/2;
-		double y2 = konec.getY() + SIRKA_UZLU/2;
+		double x1 = pocatek.getX();
+		double x2 = konec.getX();
+		double y1 = pocatek.getY();
+		double y2 = konec.getY();
 		
 		if (!pocatek.equals(konec)) {
 			g.draw(new Line2D.Double(x1, y1, x2, y2));
@@ -161,14 +173,34 @@ public class Platno extends JPanel {
 					(int)py + g.getFont().getSize()/2 - 10);
 			
 		} else {
-			g.drawOval(pocatek.getX(), pocatek.getY() - SIRKA_UZLU, SIRKA_UZLU, 4*SIRKA_UZLU/3);	
+			int width = SIRKA_UZLU;
+			int height = 4*SIRKA_UZLU/3;
+			g.drawOval(pocatek.getX(), pocatek.getY() - SIRKA_UZLU, width, height);
+			
+			 // smerovy teèny oválu
+		    int sx = 0;
+		    int sy = 1;
+		    // vektor kolmy ke smerovemu
+		    int kx = -1;
+		    int ky = 0;
+			
+		    // upravit delky vektoru podle meritka sipky
+			kx *= meritkoSipky;
+			ky *= meritkoSipky;
+			sx *= meritkoSipky;
+			sy *= meritkoSipky;
+			
+			// bod šipky  nìkde jsem otoèil souøednice, proto zámìna x a y
+			double px = pocatek.getX()+width;
+			double py = (pocatek.getY()+height)/2;
+			
+			g.draw(new Line2D.Double(px - sx + kx, py - sy + ky, px, py));
+			g.draw(new Line2D.Double(px - sx - kx, py - sy - ky, px, py));
+			
 			g.drawString(funkce, 
 					pocatek.getX() + SIRKA_UZLU/2 - g.getFontMetrics().stringWidth(funkce)/2, 
 					pocatek.getY() - 4*SIRKA_UZLU/3 + g.getFont().getSize()/2);
 		}
-			
-		vykresliStav(g, pocatek, pocatek.getBarva());
-		vykresliStav(g, konec, konec.getBarva());
 	}
 
 	/**
