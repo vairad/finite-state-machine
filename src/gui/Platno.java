@@ -10,6 +10,11 @@ import javax.swing.JPanel;
 
 import program.Hlavni;
 
+/**
+ * Objekt teto tridy predstavuje platno, kam se vykresluje automat.
+ * @author Deni Tarantikova, Radek Vais
+ * @version 7. 12. 2014
+ */
 public class Platno extends JPanel {
 
 	/**	defaultni nastaveni */
@@ -18,12 +23,8 @@ public class Platno extends JPanel {
 	private int sirka;
 	/** vyska platna */
 	private int vyska; 
-	
 	/** sirka vsech vykreslovanych stavu */
 	private final int SIRKA_UZLU = 50;
-	public final Color CHYBOVY = Color.RED;
-	public final Color AKTUALNI = Color.YELLOW;
-	public final Color BEZNY = new Color(179,196,227);
 	
 	
 	/**
@@ -38,7 +39,7 @@ public class Platno extends JPanel {
 	}
 	
 	/**
-	 * Konstruktor vytvori prazdne platno o defaultni velikosti 800x600 pixelu.
+	 * Konstruktor vytvori prazdne platno o defaultni velikosti 2000x2000 pixelu.
 	 */
 	public Platno() {
 		this.sirka = 2000;
@@ -48,13 +49,23 @@ public class Platno extends JPanel {
 	
 		
 	/**
-	 * Vykresli obrazek.
+	 * Vykresli automat.
 	 */
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
+		// vykresleni mrizky
+		g2.setColor(Color.YELLOW);
+		for(int i = 0; i < this.sirka; i += 100) {
+			g2.drawLine(i, 0, i, this.vyska);
+		}
+		for(int j = 0; j < this.vyska; j += 100) {
+			g2.drawLine(0, j, this.sirka, j);
+		}
+		
+		g2.setColor(Color.BLACK);
 		for (Stav stav : Hlavni.stavy) {
 			vykresliStav(g2, stav, stav.getBarva());
 		}
@@ -72,7 +83,12 @@ public class Platno extends JPanel {
 		Hlavni.okno.vystup.setText(" "+Hlavni.automat.getVystup());
 	}
 	
-	
+	/**
+	 * Vykresli stav automatu.
+	 * @param g pouzita grafika
+	 * @param stav stav
+	 * @param barva barva stavu
+	 */
 	public void vykresliStav(Graphics2D g, Stav stav, Color barva) {
 		g.setColor(barva);
 		g.fillOval(stav.getX(), stav.getY(), SIRKA_UZLU, SIRKA_UZLU);
@@ -83,6 +99,12 @@ public class Platno extends JPanel {
 				stav.getY() + SIRKA_UZLU/2 + g.getFont().getSize()/2);
 	}
 	
+	/**
+	 * Prebarvi dany stav.
+	 * @param g grafika
+	 * @param stav stav
+	 * @param barva barva, na kterou se ma stav prebarvit
+	 */
 	public void prebarviStav(Graphics2D g, Stav stav, Color barva) {
 		g.setColor(barva);
 		stav.setBarva(barva);
@@ -91,6 +113,13 @@ public class Platno extends JPanel {
 		g.drawOval(stav.getX(), stav.getY(), SIRKA_UZLU, SIRKA_UZLU);	
 	}
 
+	/**
+	 * Vykresli hranu mezi stavy.
+	 * @param g grafika
+	 * @param pocatek odkud vede hrana
+	 * @param konec kam vede hrana
+	 * @param funkce prechodova funkce
+	 */
 	public void kresliHranu(Graphics2D g, Stav pocatek, Stav konec, String funkce) {
 		g.setColor(Color.BLACK);
 		double meritkoSipky = 15;	

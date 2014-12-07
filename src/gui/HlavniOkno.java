@@ -8,6 +8,7 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -16,7 +17,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 
+/**
+ * Objekt teto tridy predstavuje hlavni okno aplikace, 
+ * kde se zobrazuje automat a ovladaci prvky k nìmu.
+ * @author Deni Tarantikova, Radek Vais
+ * @version 7. 12. 2014
+ */
 public class HlavniOkno extends JFrame {
+	/** defaultni nastaveni */
 	private static final long serialVersionUID = 1L;
 	
 	/** stredne modra barva */
@@ -33,9 +41,14 @@ public class HlavniOkno extends JFrame {
 	
 	/** zobrazeni front znaku automatu */
 	public JTextField zpracovany;
+	/** Textove pole vstupu */
 	public JTextField vstup;
+	/** Textove pole aktualniho vystupu */
 	public JTextField vystup;
 	
+	/**
+	 * Konstruktor vytvori hlavni okno s menu, tlacitky a platnem.
+	 */
 	public HlavniOkno() {		
 		this.setTitle("Koneèný automat s výstupní funkcí");	
 		this.setBackground(SVETLE_ZLUTA);
@@ -52,10 +65,14 @@ public class HlavniOkno extends JFrame {
 		this.setJMenuBar(getMenu());
 		this.add(getHorniPanel(), BorderLayout.NORTH);
 		this.add(posuvnik, BorderLayout.CENTER);
+		
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
 	}
 	
+	/**
+	 * Inicializuje textova pole.
+	 */
 	private void initTextPole(){
 		Dimension d = new Dimension(150,30);
 		
@@ -100,18 +117,13 @@ public class HlavniOkno extends JFrame {
 		JMenu soubor = new JMenu("Soubor");
 		soubor.setBackground(SVETLE_MODRA);
 		
-		JMenuItem polozkaMenu = new JMenuItem("Naèíst automat ze souboru...");
+		JMenuItem polozkaMenu = new JMenuItem(Akce.automatSoubor);
 		polozkaMenu.setBackground(SVETLE_MODRA);
         soubor.add(polozkaMenu);
         
-        polozkaMenu = new JMenuItem("Naèíst vstup ze souboru...");
+        polozkaMenu = new JMenuItem(Akce.stringSoubor);
         polozkaMenu.setBackground(SVETLE_MODRA);
         soubor.add(polozkaMenu);
-        soubor.addSeparator();
-        
-        polozkaMenu = new JMenuItem("Uložit výstup");
-        polozkaMenu.setBackground(SVETLE_MODRA);
-        soubor.add(polozkaMenu);  
         soubor.addSeparator();
         
         polozkaMenu = new JMenuItem(Akce.konec);
@@ -128,28 +140,24 @@ public class HlavniOkno extends JFrame {
 	private JMenu menuAutomat() {
         JMenu automat = new JMenu("Automat");
         
-        JMenuItem polozkaMenu= new JMenuItem("Zadat nový vstup");
+        JMenuItem polozkaMenu= new JMenuItem(Akce.vstup);
         polozkaMenu.setBackground(SVETLE_MODRA);
         automat.add(polozkaMenu);
-        automat.addSeparator();
         
-        polozkaMenu = new JMenuItem("Spustit/zastavit animaci");
+        polozkaMenu= new JMenuItem(Akce.string);
         polozkaMenu.setBackground(SVETLE_MODRA);
         automat.add(polozkaMenu);
-        automat.addSeparator();
         
-        polozkaMenu = new JMenuItem("Na zaèátek");
-        polozkaMenu.setBackground(SVETLE_MODRA);
-        automat.add(polozkaMenu);
-        polozkaMenu = new JMenuItem("Na konec");
-        polozkaMenu.setBackground(SVETLE_MODRA);
-        automat.add(polozkaMenu);
         automat.addSeparator();
-        
-        polozkaMenu = new JMenuItem("Krok vpøed");
+        polozkaMenu = new JMenuItem(Akce.krokVpred);
         polozkaMenu.setBackground(SVETLE_MODRA);
         automat.add(polozkaMenu);
-        polozkaMenu = new JMenuItem("Krok vzad");
+        polozkaMenu = new JMenuItem(Akce.krokVzad);
+        polozkaMenu.setBackground(SVETLE_MODRA);
+        automat.add(polozkaMenu);
+        
+        automat.addSeparator();
+        polozkaMenu = new JMenuItem(Akce.reset);
         polozkaMenu.setBackground(SVETLE_MODRA);
         automat.add(polozkaMenu);
         
@@ -179,7 +187,9 @@ public class HlavniOkno extends JFrame {
 		horniPN.setBorder(BorderFactory.createSoftBevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, Color.DARK_GRAY));
 		horniPN.setBackground(STREDNE_ZLUTA);
 		
-		horniPN.add(getTlacitkaAkcePN(), BorderLayout.CENTER);
+		horniPN.add(getTlacitkaAkcePN(), BorderLayout.EAST);
+		horniPN.add(getTlacitkaVstupPN(), BorderLayout.WEST);
+		horniPN.add(getTlacitkaVystupPN(), BorderLayout.CENTER);
 	    
 		return horniPN;
 	}
@@ -192,37 +202,58 @@ public class HlavniOkno extends JFrame {
 		JPanel tlacitkaPN = new JPanel();
 		tlacitkaPN.setBorder(BorderFactory.createTitledBorder("Akce"));
 		tlacitkaPN.setBackground(STREDNE_ZLUTA);
-		
-		JButton btVstup = new JButton(Akce.vstup);
-		
-		JButton btZacatek = new JButton(Akce.reset);
-		
-		JButton btString = new JButton(Akce.string);
-		
-		JButton btVzad = new JButton(Akce.krokVzad);
-		
-	/*	JButton btAnimace = new JButton();
-		btAnimace.setText("Spustit/zastavit animaci");
-		//btAnimace.setPreferredSize(new Dimension(30,30));*/
-		
+	
 		JButton btVpred = new JButton(Akce.krokVpred);
-		//btVpred.setPreferredSize(new Dimension(30,30));
-		
-	/*	JButton btKonec = new JButton();
-		btKonec.setText("Na konec");
-		//btKonec.setPreferredSize(new Dimension(30,30));*/
+		JButton btVzad = new JButton(Akce.krokVzad);
+		JButton btReset = new JButton(Akce.reset);
 
+		tlacitkaPN.add(btVzad);
+		tlacitkaPN.add(btVpred);
+		tlacitkaPN.add(btReset);
+		
+		return tlacitkaPN;
+	}
+	
+	/**
+	 * Vrati panel s komponentami slouzici k vystupu.
+	 * @return panel s komponentami k vystupu
+	 */
+	private JPanel getTlacitkaVystupPN() {
+		JPanel tlacitkaPN = new JPanel();
+		tlacitkaPN.setBorder(BorderFactory.createTitledBorder("Zpracovávání znakù"));
+		tlacitkaPN.setBackground(STREDNE_ZLUTA);
+
+		JLabel vystuplb = new JLabel("Výstup: ");
+		tlacitkaPN.add(vystuplb);
 		tlacitkaPN.add(vystup);
+		
+		JLabel zprlb = new JLabel("  Zpracované znaky: ");
+		tlacitkaPN.add(zprlb);
+		tlacitkaPN.add(zpracovany);
+		
+		JLabel vstuplb = new JLabel("  Nezpracované znaky: ");
+		tlacitkaPN.add(vstuplb);
+		tlacitkaPN.add(vstup);
+		
+		return tlacitkaPN;
+	}
+	
+	/**
+	 * Vrati panel s tlacitky slouzici ke vstupu.
+	 * @return panel s tlacitky ke vstupu
+	 */
+	private JPanel getTlacitkaVstupPN() {
+		JPanel tlacitkaPN = new JPanel();
+		tlacitkaPN.setBorder(BorderFactory.createTitledBorder("Vstup"));
+		tlacitkaPN.setBackground(STREDNE_ZLUTA);
+		
+		JButton btVstup = new JButton(Akce.vstup);		
+		JButton btString = new JButton(Akce.string);
+
 		tlacitkaPN.add(zpracovany);
 		tlacitkaPN.add(vstup);
 		tlacitkaPN.add(btVstup);
-		tlacitkaPN.add(btZacatek);
-		
 		tlacitkaPN.add(btString);
-		tlacitkaPN.add(btVzad);
-	//	tlacitkaPN.add(btAnimace);
-		tlacitkaPN.add(btVpred);
-	//	tlacitkaPN.add(btKonec);
 		
 		return tlacitkaPN;
 	}

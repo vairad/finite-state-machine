@@ -8,13 +8,24 @@ import java.util.List;
 
 import automat.MoorAutomat;
 
+/**
+ * Hlavní tøída slouží ke spuštìní aplikace.
+ * @author Deni Tarantikova, Radek Vais
+ * @version 7. 12. 2014
+ */
 public class Hlavni {
 	
+	/** automat, se kterym aplikace pracuje */
 	public static MoorAutomat automat = null;
+	/** Seznam stavu automatu */
 	public static List<Stav> stavy = null;
-	
+	/** hlavni okno aplikace */
 	public static HlavniOkno okno = null;
 	
+	/**
+	 * Hlavni metoda spousti aplikaci.
+	 * @param args nepouzito
+	 */
 	public static void main(String[] args) {
 		
 		if(args.length==0){
@@ -35,6 +46,10 @@ public class Hlavni {
 	
 	}
 	
+	/**
+	 * Vrati aktualni stav.
+	 * @return aktualni stav
+	 */
 	public static Stav getAktualniStav(){
 		return stavy.get(automat.getAktualniStav());
 	}

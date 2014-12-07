@@ -27,7 +27,7 @@ public class Loader {
 	 * Nacte konecny automat Moorova typu ze souboru. Ve formatu:
 	 * 
 	 *Vstupni abeceda:
-	 * (libovolny pocet znaku, bez pouziti zaku '0')
+	 * (libovolny pocet znaku, bez pouziti znaku '0')
 	 *Vystupni abeceda:
 	 * (libovolny pocet znaku)
 	 *Vystupni funkce:
@@ -130,6 +130,11 @@ public class Loader {
 		return pole;
 	}
 	
+	/**
+	 * Nacte ze souboru stavy a vrati jejich seznam.
+	 * @param filePath cesta k souboru
+	 * @return seznam stavu
+	 */
 	public static List<Stav> loadStavy(String filePath) {
 		List<Stav> stavy = new LinkedList<Stav>();
 		try {			
