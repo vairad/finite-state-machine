@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
@@ -45,6 +46,8 @@ public class HlavniOkno extends JFrame {
 	public JTextField vstup;
 	/** Textove pole aktualniho vystupu */
 	public JTextField vystup;
+	/** Textove pole aktualniho vystupniho retezce */
+	public JTextField vystupni_retezec;
 	
 	/**
 	 * Konstruktor vytvori hlavni okno s menu, tlacitky a platnem.
@@ -82,6 +85,11 @@ public class HlavniOkno extends JFrame {
 		Font f = new Font("Calibri", Font.BOLD, 20);
 		vystup.setFont(f);
 		vystup.setDisabledTextColor(Color.RED);
+		
+		vystupni_retezec = new JTextField();
+		vystupni_retezec.setPreferredSize(d);
+		vystupni_retezec.setEnabled(false);
+		vystupni_retezec.setDisabledTextColor(Color.RED);
 		
 		vstup = new JTextField();
 		vstup.setPreferredSize(d);
@@ -182,16 +190,27 @@ public class HlavniOkno extends JFrame {
 	 * Vrati horni panel s tlacitky.
 	 * @return horni panel
 	 */
-	private JPanel getHorniPanel() {
+	private JScrollPane getHorniPanel() {
 		JPanel horniPN = new JPanel(new BorderLayout());
 		horniPN.setBorder(BorderFactory.createSoftBevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, Color.DARK_GRAY));
 		horniPN.setBackground(STREDNE_ZLUTA);
 		
-		horniPN.add(getTlacitkaAkcePN(), BorderLayout.EAST);
-		horniPN.add(getTlacitkaVstupPN(), BorderLayout.WEST);
-		horniPN.add(getTlacitkaVystupPN(), BorderLayout.CENTER);
-	    
-		return horniPN;
+		JPanel vrsek = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		vrsek.setBackground(STREDNE_ZLUTA);
+		JPanel spodek = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		spodek.setBackground(STREDNE_ZLUTA);
+		
+		
+		vrsek.add(getTlacitkaAkcePN());
+		vrsek.add(getTlacitkaVstupPN());
+		
+		spodek.add(getTlacitkaVystupPN());
+		spodek.add(getVystupPN());
+		
+		horniPN.add(vrsek, BorderLayout.NORTH);
+		horniPN.add(spodek, BorderLayout.SOUTH);
+		
+		return new JScrollPane(horniPN);
 	}
 	
 	/**
@@ -215,17 +234,13 @@ public class HlavniOkno extends JFrame {
 	}
 	
 	/**
-	 * Vrati panel s komponentami slouzici k vystupu.
-	 * @return panel s komponentami k vystupu
+	 * Vrati panel s komponentami slouzici k informování o prùbìhu zpracování øetìzce.
+	 * @return panel s komponentami o práci automatu
 	 */
 	private JPanel getTlacitkaVystupPN() {
 		JPanel tlacitkaPN = new JPanel();
 		tlacitkaPN.setBorder(BorderFactory.createTitledBorder("Zpracovávání znakù"));
 		tlacitkaPN.setBackground(STREDNE_ZLUTA);
-
-		JLabel vystuplb = new JLabel("Výstup: ");
-		tlacitkaPN.add(vystuplb);
-		tlacitkaPN.add(vystup);
 		
 		JLabel zprlb = new JLabel("  Zpracované znaky: ");
 		tlacitkaPN.add(zprlb);
@@ -236,6 +251,26 @@ public class HlavniOkno extends JFrame {
 		tlacitkaPN.add(vstup);
 		
 		return tlacitkaPN;
+	}
+	
+	/**
+	 * Vrati panel s komponentami slouzici k zobrazeni vystupu automatu.
+	 * @return panel s komponentami k zobrazeni vystupu
+	 */
+	private JPanel getVystupPN(){
+		JPanel vystupPN = new JPanel();
+		vystupPN.setBorder(BorderFactory.createTitledBorder("Výstup automatu"));
+		vystupPN.setBackground(STREDNE_ZLUTA);
+		
+		JLabel vystupRlb = new JLabel("Výstupní øetìzec: ");
+		vystupPN.add(vystupRlb);
+		vystupPN.add(vystupni_retezec);
+		
+		JLabel vystuplb = new JLabel("Aktuální výstup: ");
+		vystupPN.add(vystuplb);
+		vystupPN.add(vystup);
+		
+		return vystupPN;
 	}
 	
 	/**
