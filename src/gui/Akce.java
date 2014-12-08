@@ -321,6 +321,12 @@ public class Akce {
 				try {
 					vstupni = new File(oteviraciDialog.getSelectedFile().getAbsolutePath());
 					sc = new Scanner(vstupni);
+					if(!sc.hasNext()){
+						//pokud není co èíst uteè...
+						JOptionPane.showMessageDialog(Hlavni.okno, "V souboru není validní øetìzec.", "Chyba vstupu", JOptionPane.WARNING_MESSAGE);
+						sc.close();
+						return;
+					}
 					vstup = sc.next();
 					sc.close();
 					
