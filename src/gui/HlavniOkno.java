@@ -149,7 +149,19 @@ public class HlavniOkno extends JFrame {
 	private JMenu menuAutomat() {
         JMenu automat = new JMenu("Automat");
         
-        JMenuItem polozkaMenu= new JMenuItem(Akce.vstup);
+        JMenuItem polozkaMenu;
+        //==================================================
+        polozkaMenu= new JMenuItem(Akce.sLog);
+        polozkaMenu.setBackground(SVETLE_MODRA);
+        automat.add(polozkaMenu);
+        
+        polozkaMenu= new JMenuItem(Akce.kLog);
+        polozkaMenu.setBackground(SVETLE_MODRA);
+        automat.add(polozkaMenu);
+        
+        automat.addSeparator();
+        //====================================================
+        polozkaMenu= new JMenuItem(Akce.vstup);
         polozkaMenu.setBackground(SVETLE_MODRA);
         automat.add(polozkaMenu);
         
@@ -158,6 +170,7 @@ public class HlavniOkno extends JFrame {
         automat.add(polozkaMenu);
         
         automat.addSeparator();
+        //========================================================
         polozkaMenu = new JMenuItem(Akce.krokVpred);
         polozkaMenu.setBackground(SVETLE_MODRA);
         automat.add(polozkaMenu);
@@ -166,6 +179,7 @@ public class HlavniOkno extends JFrame {
         automat.add(polozkaMenu);
         
         automat.addSeparator();
+        //========================================================
         polozkaMenu = new JMenuItem(Akce.reset);
         polozkaMenu.setBackground(SVETLE_MODRA);
         automat.add(polozkaMenu);

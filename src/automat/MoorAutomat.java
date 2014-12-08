@@ -58,7 +58,6 @@ public class MoorAutomat {
 	 * @return znak z výstupní abecedy
 	 */
 	public char getVystup(){
-		log("Automat vykazal vystup: "+vystupni_funkce[aktualni_stav]+"ze stavu: "+aktualni_stav);
 		return vystupni_funkce[aktualni_stav];
 	}
 	
@@ -78,6 +77,7 @@ public class MoorAutomat {
 			if(prechodova_funkce[aktualni_stav][i]==c){
 				log("Automat pøešel ze stavu: "+aktualni_stav+" do stavu: "+i+" znakem: "+c);
 				aktualni_stav=i;
+				log("Automat je na vystpni hladine: "+vystupni_funkce[aktualni_stav]+" a ve stavu: "+aktualni_stav);
 				return true;
 			}
 		}
@@ -171,7 +171,7 @@ public class MoorAutomat {
 	 */
 	public void startLogovaniAutomatu(String filePath){
 		try {
-			log = new BufferedWriter(new FileWriter(new File("log.txt")));
+			log = new BufferedWriter(new FileWriter(new File(filePath)));
 		} catch (IOException e) {
 			System.out.println("Nepodaøilo se vytvoøit soubor pro logovani");
 		} 
@@ -188,7 +188,7 @@ public class MoorAutomat {
 				log.newLine();
 			} catch (IOException e) {
 				log=null;
-				System.err.println("Pristup do souboru s logem nebyl mozny");
+				System.out.println("Pristup do souboru s logem nebyl mozny");
 				// pokud se nepovede log, neni treba upozornovat uzivatele...
 				// po vetsinou by to melo projit, a zastavit se jiz pri inicializaci
 			}
@@ -204,7 +204,7 @@ public class MoorAutomat {
 				log.close();
 			} catch (IOException e) {
 				log=null;
-				System.err.println("Pristup do souboru s logem nebyl mozny");
+				//System.err.println("Pristup do souboru s logem nebyl mozny");
 				// pokud se nepovede log, neni treba upozornovat uzivatele...
 				// po vetsinou by to melo projit, a zastavit se jiz pri inicializaci
 			}

@@ -28,6 +28,12 @@ public class Akce {
 	/** nacteni automatu ze souboru */
 	public static AbstractAction automatSoubor = new Akce().new NactiAutomatSouborAkce();
 	
+	
+	/**zacatek logovani*/
+	public static AbstractAction sLog = new Akce().new StartLogAkce();
+	/**konec logovani*/
+	public static AbstractAction kLog = new Akce().new KonecLoguAkce();
+	
 	/** reset automatu */
 	public static AbstractAction reset = new Akce().new ResetAkce();
 	/** krok podle znaku */
@@ -96,10 +102,62 @@ public class Akce {
 		 * Ukonci aplikaci.
 		 */
 		public void actionPerformed(ActionEvent e) {
+			Hlavni.automat.close();
 			System.exit(0);
 		}
 	}
 
+	
+	//===================================================================================================================	
+		/**
+		 * Zajistuje ukonceni logovani automatu.
+		 */
+		class KonecLoguAkce extends AbstractAction {
+			/** defaultni nastaveni */
+			private static final long serialVersionUID = 1L;
+			
+			/**
+			 * Konstruktor nastavi popis tlacitka a klavesove zkratky.
+			 */
+			public KonecLoguAkce() {
+				putValue(NAME, "Konec logovani automatu"); // jmeno akce
+	            putValue(SHORT_DESCRIPTION, "Ukonèí zápis akcí automatu do souboru."); // popis tlacitka
+	       }
+			
+			/**
+			 * Ukonci logovani automatu.
+			 */
+			public void actionPerformed(ActionEvent e) {
+				Hlavni.automat.close();
+			}
+		}
+
+		//===================================================================================================================	
+		/**
+		 * Zajistuje zacatek logovani automatu.
+		 */
+		class StartLogAkce extends AbstractAction {
+			/** defaultni nastaveni */
+			private static final long serialVersionUID = 1L;
+			
+			/**
+			 * Konstruktor nastavi popis tlacitka a klavesove zkratky.
+			 */
+			public StartLogAkce() {
+				putValue(NAME, "Start logovani automatu"); // jmeno akce
+	            putValue(SHORT_DESCRIPTION, "Zapne zápis akcí automatu do zvoleneho souboru"); // popis tlacitka
+	           }
+			
+			/**
+			 * Zacne logovat do automatu.
+			 */
+			public void actionPerformed(ActionEvent e) {
+				String file = JOptionPane.showInputDialog(Hlavni.okno, "Zadej název souboru logu");
+				Hlavni.automat.startLogovaniAutomatu(file);
+			}
+		}
+
+	
 	
 //===================================================================================================================
 	
