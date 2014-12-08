@@ -38,9 +38,7 @@ public class HlavniOkno extends JFrame {
 	private final Color SVETLE_MODRA = new Color(223,231,247);
 	/** stredne zluta barva */
 	private final Color STREDNE_ZLUTA = new Color(253,236,126);
-	
-	/** kreslici platno */
-	private Platno platno;
+
 	
 	/** zobrazeni front znaku automatu */
 	public JTextField zpracovany;
@@ -61,7 +59,7 @@ public class HlavniOkno extends JFrame {
 		this.setSize(new Dimension(500,500));
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
-		this.platno = new Platno();
+		Platno platno = new Platno();
 		platno.setBackground(SVETLE_ZLUTA);
 		
 		initTextPole();
