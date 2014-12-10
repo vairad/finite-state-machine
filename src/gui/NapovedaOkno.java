@@ -45,7 +45,9 @@ public class NapovedaOkno extends JFrame {
 				+ "Mùžete ho naèíst i ze souboru v textovém formátu."
 				+ "\n3) Tlaèítky \"Krok vpøed\" a \"Krok vzad\" krokujete automat."
 				+ "\n4) Tlaèítkem \"Reset\" vrátíte automat do pùvodního stavu."
-				+ "\n5) V polích v záložce \"Zpracovávání znakù\" vidíte aktuální stav zpracovávání vstupu.");
+				+ "\n5) V polích v záložce \"Zpracovávání znakù\" vidíte aktuální stav zpracovávání vstupu."
+				+ "\n6) V polích v záložce \"Výstup automatu\" vidíte výstup automatu."
+				+ "\n7) V menu \"automat\" mùžete zapnout/vypnout logování výstupu automatu do zvoleného souboru.");
 		popis.setBackground(STREDNE_ZLUTA);
 		popis.setLineWrap(true);
 		popis.setWrapStyleWord(true);

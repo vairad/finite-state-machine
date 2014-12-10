@@ -120,7 +120,7 @@ public class Akce {
 			 * Konstruktor nastavi popis tlacitka a klavesove zkratky.
 			 */
 			public KonecLoguAkce() {
-				putValue(NAME, "Konec logovani automatu"); // jmeno akce
+				putValue(NAME, "Konec logování automatu"); // jmeno akce
 	            putValue(SHORT_DESCRIPTION, "Ukonèí zápis akcí automatu do souboru."); // popis tlacitka
 	       }
 			
@@ -144,8 +144,8 @@ public class Akce {
 			 * Konstruktor nastavi popis tlacitka a klavesove zkratky.
 			 */
 			public StartLogAkce() {
-				putValue(NAME, "Start logovani automatu"); // jmeno akce
-	            putValue(SHORT_DESCRIPTION, "Zapne zápis akcí automatu do zvoleneho souboru"); // popis tlacitka
+				putValue(NAME, "Start logování automatu"); // jmeno akce
+	            putValue(SHORT_DESCRIPTION, "Zapne zápis akcí automatu do zvoleného souboru"); // popis tlacitka
 	           }
 			
 			/**

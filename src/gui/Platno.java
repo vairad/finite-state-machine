@@ -190,9 +190,9 @@ public class Platno extends JPanel {
 			sx *= meritkoSipky;
 			sy *= meritkoSipky;
 			
-			// bod šipky  nìkde jsem otoèil souøednice, proto zámìna x a y
+			// bod sipky
 			double px = pocatek.getX()+width;
-			double py = (pocatek.getY()+height)/2;
+			double py = pocatek.getY();
 			
 			g.draw(new Line2D.Double(px - sx + kx, py - sy + ky, px, py));
 			g.draw(new Line2D.Double(px - sx - kx, py - sy - ky, px, py));
