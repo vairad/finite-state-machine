@@ -224,6 +224,7 @@ public class Akce {
 				Hlavni.stavy.get(Hlavni.automat.getAktualniStav()).setBarva(Stav.AKTIVNI);
 				
 				if(Hlavni.automat != null && Hlavni.stavy!=null){
+					Akce.reset.actionPerformed(e);
 					Hlavni.okno.repaint();
 				}else{
 					System.out.println("Data nebyla korektnì naètena.");

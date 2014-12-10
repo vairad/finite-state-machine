@@ -11,7 +11,7 @@ public class Stav {
 	/** barva neaktivniho stavu */
 	public static final Color BEZNY = new Color(179,196,227);
 	/** barva aktivniho stavu */
-	public static final Color AKTIVNI = new Color(0,196,227);
+	public static final Color AKTIVNI = Color.YELLOW;
 	/** souradnice x */
 	private int x;
 	/** souradnice y */

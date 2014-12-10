@@ -31,7 +31,7 @@ public class Loader {
 	 *Vystupni abeceda:
 	 * (libovolny pocet znaku)
 	 *Vystupni funkce:
-	 * (zanaky vystupni funkce oddelene mezerou)
+	 * (znaky vystupni funkce oddelene mezerou)
 	 *Pocatecni stav:
 	 * (id pocatecniho stavu)
 	 *Prechodova funkce:
