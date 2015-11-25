@@ -20,4 +20,7 @@ Thumbs.db
 *.txt
 #ignoruje automat soubory
 *.automat
+#ignoruje slozku build vytvorenou pomoci ant
+/build/
+
 

@@ -1,0 +1,28 @@
+<project>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes"  encoding="cp1250" />
+    </target>
+
+    <target name="jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/konecny_automat.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="program.Hlavni"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run">
+        <java jar="build/jar/konecny_automat.jar" fork="true">
+		<arg path="in/01.automat" />
+	</java>
+    </target>
+
+</project>
+
